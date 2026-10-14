@@ -1,6 +1,6 @@
 // Shows the rooms as cards with name, capacity and a "Reservar" button.
-// The button has no action yet; the booking form comes in a later step.
-export default function ListaSalas({ salas }) {
+// The button tells the parent which room was chosen.
+export default function ListaSalas({ salas, onReservar }) {
   return (
     <ul className="grid gap-4">
       {salas.map((sala) => (
@@ -14,6 +14,7 @@ export default function ListaSalas({ salas }) {
           </div>
           <button
             type="button"
+            onClick={() => onReservar(sala)}
             className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
           >
             Reservar
