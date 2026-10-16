@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Cabecalho from "../../components/Cabecalho";
 import ListaReservas from "../../components/ListaReservas";
 
 // Sample data fixed in the code; it will come from the database in Session 3.
@@ -10,15 +10,15 @@ const reservas = [
 
 export default function MinhasReservas() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:py-12">
-      <Link
-        href="/"
-        className="mb-4 inline-flex h-11 items-center text-base font-medium text-blue-700 hover:underline"
-      >
-        ← Voltar às salas
-      </Link>
-      <h1 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl">As minhas reservas</h1>
-      <ListaReservas reservas={reservas} />
-    </main>
+    <>
+      <Cabecalho paginaAtual="reservas" />
+      <main className="mx-auto w-full max-w-5xl px-4 pb-16">
+        <section className="py-6 md:py-10">
+          <h1 className="text-4xl font-bold text-marinho sm:text-5xl">As minhas reservas</h1>
+          <p className="text-2xl font-light text-marinho sm:text-3xl">Reservas agendadas</p>
+        </section>
+        <ListaReservas reservas={reservas} />
+      </main>
+    </>
   );
 }

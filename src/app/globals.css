@@ -1,19 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9fafb;
-  --foreground: #171717;
+  --background: #ffffff;
+  --foreground: #13294b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-montserrat);
+}
+
+/* Brand colours: available as classes such as bg-marca, text-marinho, bg-lima. */
+@theme {
+  --color-marca: #0b8de0;
+  --color-marca-escuro: #0873b8;
+  --color-marinho: #13294b;
+  --color-lima: #cddc39;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
 }

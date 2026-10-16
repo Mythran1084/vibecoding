@@ -20,16 +20,16 @@ export default function FormularioReserva({ sala, onFechar }) {
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 p-4"
+      className="fixed inset-0 z-40 flex items-center justify-center bg-marinho/60 p-4"
       onClick={onFechar}
     >
       <form
         onSubmit={submeter}
         // Clicks inside the form must not reach the backdrop and close it.
         onClick={(event) => event.stopPropagation()}
-        className="w-full max-w-sm rounded-xl bg-white p-6 text-gray-900 shadow-xl"
+        className="w-full max-w-sm rounded-2xl bg-white p-6 text-marinho shadow-xl"
       >
-        <h2 className="mb-5 text-xl font-semibold">Reservar {sala.nome}</h2>
+        <h2 className="mb-5 text-xl font-bold">Reservar {sala.nome}</h2>
 
         <label className="mb-1 block text-base font-medium" htmlFor="data-reserva">
           Data da reserva
@@ -38,7 +38,7 @@ export default function FormularioReserva({ sala, onFechar }) {
           id="data-reserva"
           type="date"
           required
-          className="mb-4 h-11 w-full rounded-lg border border-gray-300 px-3 text-base"
+          className="mb-4 h-11 w-full rounded-lg border border-gray-300 px-3 text-base focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/30"
         />
 
         <label className="mb-1 block text-base font-medium" htmlFor="hora-inicio">
@@ -48,7 +48,7 @@ export default function FormularioReserva({ sala, onFechar }) {
           id="hora-inicio"
           type="time"
           required
-          className="mb-4 h-11 w-full rounded-lg border border-gray-300 px-3 text-base"
+          className="mb-4 h-11 w-full rounded-lg border border-gray-300 px-3 text-base focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/30"
         />
 
         <label className="mb-1 block text-base font-medium" htmlFor="hora-fim">
@@ -58,20 +58,20 @@ export default function FormularioReserva({ sala, onFechar }) {
           id="hora-fim"
           type="time"
           required
-          className="mb-6 h-11 w-full rounded-lg border border-gray-300 px-3 text-base"
+          className="mb-6 h-11 w-full rounded-lg border border-gray-300 px-3 text-base focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/30"
         />
 
         <div className="flex gap-3">
           <button
             type="button"
             onClick={onFechar}
-            className="h-11 flex-1 rounded-lg border border-gray-300 px-4 text-base font-medium hover:bg-gray-100"
+            className="h-11 flex-1 rounded-full border-2 border-marca px-4 text-base font-semibold text-marca hover:bg-marca/5"
           >
             Cancelar
           </button>
           <button
             type="submit"
-            className="h-11 flex-1 rounded-lg bg-blue-600 px-4 text-base font-medium text-white hover:bg-blue-700"
+            className="h-11 flex-1 rounded-full bg-marca px-4 text-base font-semibold text-white hover:bg-marca-escuro"
           >
             Confirmar
           </button>

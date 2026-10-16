@@ -6,16 +6,16 @@ export default function ListaSalas({ salas, onReservar }) {
       {salas.map((sala) => (
         <li
           key={sala.id}
-          className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+          className="flex flex-col gap-4 rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_8px_30px_rgba(19,41,75,0.08)]"
         >
           <div>
-            <p className="text-lg font-semibold text-gray-900">{sala.nome}</p>
-            <p className="text-base text-gray-600">Capacidade: {sala.capacidade} pessoas</p>
+            <p className="text-lg font-semibold text-marinho">{sala.nome}</p>
+            <p className="text-base text-marinho/70">Capacidade: {sala.capacidade} pessoas</p>
           </div>
           <button
             type="button"
             onClick={() => onReservar(sala)}
-            className="h-11 w-full rounded-lg bg-blue-600 px-4 text-base font-medium text-white hover:bg-blue-700"
+            className="h-11 w-full rounded-full bg-marca px-4 text-base font-semibold text-white hover:bg-marca-escuro"
           >
             Reservar
           </button>
