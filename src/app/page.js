@@ -1,14 +1,7 @@
 import Link from "next/link";
 import Cabecalho from "../components/Cabecalho";
 import SalasComReserva from "../components/SalasComReserva";
-
-// Sample data fixed in the code; it will come from the database in Session 3.
-const salas = [
-  { id: 1, nome: "Sala Atlântico", capacidade: 8 },
-  { id: 2, nome: "Sala Douro", capacidade: 4 },
-  { id: 3, nome: "Sala Tejo", capacidade: 12 },
-  { id: 4, nome: "Auditório", capacidade: 40 },
-];
+import { salas } from "./dadosExemplo";
 
 export default function Home() {
   return (
