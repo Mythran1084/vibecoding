@@ -47,8 +47,8 @@ A app está organizada em 4 camadas: apresentação, aplicacional, dominio e per
   16px (text-base). Verificar cada ecrã a 375px e a 1280px de largura.
 - Se um limite do pedido ("não alterar X") entrar em conflito com a tarefa,
   dizê-lo no plano e propor a alteração mínima.
-- Guardar datas como texto "AAAA-MM-DD" e formatá-las sem Date, para o fuso
-  horário não mudar o dia.
+- No domínio, inicio e fim são Date em UTC. Na apresentação, a data entra e
+  sai como texto e é convertida sem depender do fuso horário do browser.
 - Os segredos ficam só no .env.local, nunca no .env nem no código.
 
 ## Regras do Next.js (geridas pelo next dev em AGENTS.md)
