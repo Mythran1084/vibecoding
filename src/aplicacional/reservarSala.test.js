@@ -123,4 +123,25 @@ describe("reservarSala", () => {
       erro: "Não foi possível fazer a reserva. Tente novamente.",
     });
   });
+
+  it("recusa uma reserva com mais de 2 horas, sem lançar exceção, e não guarda nada", async () => {
+    const repositorio = criarRepositorioFalso({ salas });
+    const resultado = await reservarSala(repositorio, {
+      salaId: 1,
+      inicio: hora("10:00"),
+      fim: hora("12:01"),
+    });
+    expect(resultado).toEqual({ sucesso: false, erro: "A reserva não pode ter mais de 2 horas" });
+    expect(repositorio.reservasGuardadas).toEqual([]);
+  });
+
+  it("aceita uma reserva de exatamente 2 horas", async () => {
+    const repositorio = criarRepositorioFalso({ salas });
+    const resultado = await reservarSala(repositorio, {
+      salaId: 1,
+      inicio: hora("10:00"),
+      fim: hora("12:00"),
+    });
+    expect(resultado.sucesso).toBe(true);
+  });
 });
