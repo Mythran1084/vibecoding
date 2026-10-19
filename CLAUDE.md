@@ -24,6 +24,31 @@ A app está organizada em 4 camadas: apresentação, aplicacional, dominio e per
 - As variáveis de ambiente sensíveis e respetivas credenciais de acesso
   (DATABASE_URL, etc.) nunca aparecem em código do lado do cliente.
 
+## Persistência (PostgreSQL no Aiven)
+- A app usa o repositório PostgreSQL (src/persistencia/repositorioPostgres.js),
+  criado só no ficheiro de composição src/app/actions.js, e só quando um pedido
+  precisa dele (nunca ao carregar o ficheiro, para o build não precisar da base
+  de dados). O repositório em memória fica para os testes de contrato.
+- Qualquer implementação do repositório tem de passar nos testes de contrato
+  (src/persistencia/contratoRepositorio.js).
+- A ligação é sempre feita por src/persistencia/ligacao.js: sempre cifrada, com
+  o certificado confirmado pelo DATABASE_CA_CERT. Nunca desligar a verificação
+  do certificado (rejectUnauthorized: true) e retirar o sslmode do endereço.
+- O endereço, o utilizador e a palavra-passe nunca aparecem em mensagens nem em
+  registos: os erros do pg passam sempre por mensagemSegura.
+- As consultas usam sempre parâmetros ($1, $2, ...); nunca colar no SQL texto
+  que venha do utilizador.
+- Datas: na base de dados, inicio e fim são TIMESTAMPTZ; no código, Date em UTC.
+  A apresentação converte de e para a hora de Lisboa de forma explícita
+  (src/app/horaLisboa.js).
+- Variáveis de ambiente:
+  - DATABASE_URL (utilizador app_reservas, só SELECT, INSERT, UPDATE e DELETE
+    nas tabelas salas e reservas) e DATABASE_CA_CERT: no .env.local e na Vercel.
+  - DATABASE_ADMIN_URL (utilizador administrador): só no .env.local do
+    computador do dono, para npm run migrar. Nunca na Vercel nem no código.
+- Alterações às tabelas e permissões fazem-se em src/persistencia/migracao.js
+  (npm run migrar), que tem de poder correr várias vezes sem erros.
+
 ## Testes
 - A lógica de domínio, aplicacional e persistência só está concluída com
   testes validados; não alterar os testes somente para os fazer validar.

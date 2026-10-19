@@ -1,7 +1,24 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { connection } from "next/server";
 import Cabecalho from "../components/Cabecalho";
 import SalasComReserva from "../components/SalasComReserva";
-import { salas } from "./dadosExemplo";
+import { listarSalasDaBaseDeDados } from "./actions";
+
+// As salas vêm da base de dados a cada pedido. connection() adia a leitura para o momento
+// do pedido, para o build não tentar ligar-se à base de dados.
+async function SalasDisponiveis() {
+  await connection();
+  const resultado = await listarSalasDaBaseDeDados();
+  if (!resultado.sucesso) {
+    return (
+      <p className="rounded-lg bg-red-50 p-4 text-base text-red-700" role="alert">
+        {resultado.erro}
+      </p>
+    );
+  }
+  return <SalasComReserva salas={resultado.salas} />;
+}
 
 export default function Home() {
   return (
@@ -45,7 +62,9 @@ export default function Home() {
         <h2 id="salas" className="mb-4 scroll-mt-4 text-2xl font-bold text-marinho">
           Salas disponíveis
         </h2>
-        <SalasComReserva salas={salas} />
+        <Suspense fallback={<p className="text-base text-marinho/70">A carregar as salas…</p>}>
+          <SalasDisponiveis />
+        </Suspense>
       </main>
     </>
   );
