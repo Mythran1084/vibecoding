@@ -19,6 +19,7 @@ const MENSAGENS_POR_CODIGO = {
   ECONNREFUSED: "Não foi possível contactar a base de dados.",
   ETIMEDOUT: "Não foi possível contactar a base de dados.",
   ECONNRESET: "Não foi possível contactar a base de dados.",
+  42501: "O utilizador não tem permissão para esta operação.",
 };
 
 const CODIGOS_DE_CERTIFICADO = [
@@ -30,7 +31,7 @@ const CODIGOS_DE_CERTIFICADO = [
   "CERT_HAS_EXPIRED",
 ];
 
-function mensagemSegura(erro) {
+export function mensagemSegura(erro) {
   const codigo = erro?.code;
   if (CODIGOS_DE_CERTIFICADO.includes(codigo)) {
     return "Não foi possível confirmar o certificado da base de dados (verifique o DATABASE_CA_CERT).";
